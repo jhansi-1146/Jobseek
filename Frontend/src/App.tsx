@@ -19,6 +19,8 @@ import CertificationsPage from './pages/user/CertificationsPage';
 import ProgressPage from './pages/user/ProgressPage';
 import SignupPage from './pages/SignupPage';
 import VerificationPage from './pages/VerificationPage';
+// Import the new component for the Find Jobs page
+import FindJobsPage from './pages/user/FindJobsPage';
 
 function App() {
   return (
@@ -46,10 +48,10 @@ function App() {
         <Route path="/admin/analytics" element={<Analytics />} />
         <Route path="/admin/profile" element={<Profile />} />
         <Route path="/admin/settings" element={<AdminSettings />} />
+        <Route path="/user/jobs" element={<FindJobsPage />} />
       </Routes>
     </div>
   );
 }
-
 
 export default App;

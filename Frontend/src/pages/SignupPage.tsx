@@ -68,7 +68,17 @@ const SignupPage: React.FC = () => {
                   required
                 />
               </div>
-              
+              <div>
+                <label className="block text-sm font-medium text-gray-800 mb-2 font-sans">Phone Number</label>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={e => setPhone(e.target.value)}
+                  className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-sans"
+                  placeholder="Enter your phone number"
+                  required
+                />
+              </div>
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors duration-200 font-semibold"

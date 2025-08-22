@@ -47,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
 
   return (
     <aside className={`bg-white h-full flex flex-col select-none border-r border-gray-100
-                      ${isCollapsed ? 'w-20' : 'w-72'} transition-all duration-300 ease-in-out`}>
+                      ${isCollapsed ? 'w-14' : 'w-56'} transition-all duration-300 ease-in-out`}>
       {/* Logo and App Name */}
       <div className={`flex items-center h-20 px-4 border-b border-gray-100 ${isCollapsed ? 'justify-center' : 'px-8'}`}>
         {!isCollapsed && (

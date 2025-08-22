@@ -1,4 +1,3 @@
-// src/components/UserDashboard.tsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Bell, Settings as SettingsIcon, User as UserIcon } from 'lucide-react';
@@ -34,8 +33,8 @@ export default function UserDashboard() {
 
   return (
     <Layout role="student">
-      <main className="bg-gray-50 min-h-screen py-10 px-4 md:px-8">
-        <div className="max-w-7xl mx-auto">
+      <main className="bg-gray-50 min-h-screen py-10">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
           {/* Greeting & Stats */}
           <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">Welcome back, Chinmayi Sharma</h1>
           <p className="text-lg text-gray-500 mb-8">Here's what's happening with your career journey</p>
@@ -69,7 +68,7 @@ export default function UserDashboard() {
                 ))}
               </div>
               <button
-                onClick={() => navigate('/user/tracker')} // Changed navigation path to /user/tracker
+                onClick={() => navigate('/user/tracker')}
                 className="w-full py-2 rounded-lg border border-gray-200 text-base font-semibold text-gray-700 hover:bg-gray-100">
                 View All Applications
               </button>

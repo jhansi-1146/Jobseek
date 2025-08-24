@@ -34,57 +34,59 @@ export default function UserDashboard() {
   return (
     <Layout role="student">
       <main className="bg-gray-50 min-h-screen py-10">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="max-w-full">
           {/* Greeting & Stats */}
-          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">Welcome back, Chinmayi Sharma</h1>
-          <p className="text-lg text-gray-500 mb-8">Here's what's happening with your career journey</p>
+          <div className="px-4 md:px-8">
+            <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-1">Welcome back, Chinmayi Sharma</h1>
+            <p className="text-sm text-gray-500 mb-6">Here's what's happening with your career journey</p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 px-4 md:px-8">
             {stats.map((s, i) => (
-              <div key={i} className="bg-white rounded-xl border border-gray-200 p-6 flex flex-col shadow-sm hover:shadow transition-shadow">
-                <span className={`text-2xl font-extrabold ${s.color}`}>{s.value}</span>
-                <span className="font-semibold text-gray-900 mt-1">{s.label}</span>
-                <span className="text-sm text-gray-400 mt-1">{s.sub}</span>
+              <div key={i} className="bg-white rounded-lg border border-gray-200 p-4 flex flex-col shadow-sm hover:shadow transition-shadow">
+                <span className={`text-xl font-extrabold ${s.color}`}>{s.value}</span>
+                <span className="font-medium text-gray-900 mt-0.5 text-sm">{s.label}</span>
+                <span className="text-xs text-gray-400">{s.sub}</span>
               </div>
             ))}
           </div>
 
           {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 px-4 md:px-8">
             {/* Recent Applications */}
-            <div className="col-span-2 bg-white rounded-xl border border-gray-200 p-8 shadow-sm">
-              <h2 className="text-2xl font-bold text-gray-900 mb-1">Recent Applications</h2>
-              <p className="text-base text-gray-500 mb-6">Track your latest job applications</p>
-              <div className="flex flex-col gap-4 mb-4">
+            <div className="col-span-2 bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+              <h2 className="text-xl font-bold text-gray-900 mb-1">Recent Applications</h2>
+              <p className="text-sm text-gray-500 mb-4">Track your latest job applications</p>
+              <div className="flex flex-col gap-3">
                 {applications.map((app, i) => (
-                  <div key={i} className="bg-white border border-gray-200 rounded-lg px-6 py-4 flex items-center justify-between">
+                  <div key={i} className="bg-white border border-gray-200 rounded-md px-4 py-3 flex items-center justify-between">
                     <div>
-                      <div className="font-semibold text-lg text-gray-900">{app.title}</div>
-                      <div className="text-gray-500 text-base">{app.company}</div>
-                      <div className="text-gray-400 text-sm">{app.date}</div>
+                      <div className="font-semibold text-base text-gray-900">{app.title}</div>
+                      <div className="text-gray-500 text-sm">{app.company}</div>
+                      <div className="text-gray-400 text-xs">{app.date}</div>
                     </div>
-                    <span className={`px-4 py-1 rounded-full text-sm font-semibold ${app.statusColor}`}>{app.status}</span>
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${app.statusColor}`}>{app.status}</span>
                   </div>
                 ))}
               </div>
               <button
                 onClick={() => navigate('/user/tracker')}
-                className="w-full py-2 rounded-lg border border-gray-200 text-base font-semibold text-gray-700 hover:bg-gray-100">
+                className="mt-4 w-full py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-100">
                 View All Applications
               </button>
             </div>
 
             {/* Right Column: Quick Actions & Upcoming Tasks */}
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-6">
               {/* Quick Actions */}
-              <div className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Quick Actions</h2>
-                <div className="flex flex-col gap-3">
+              <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+                <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
+                <div className="flex flex-col gap-2">
                   {quickActions.map((action, i) => (
                     <button
                       key={i}
                       onClick={() => navigate(action.path)}
-                      className={`w-full py-3 rounded ${action.primary ? 'bg-blue-700 text-white font-semibold' : 'bg-white text-gray-900 border border-gray-200 font-medium hover:bg-gray-50'}`}
+                      className={`w-full py-2.5 rounded ${action.primary ? 'bg-blue-700 text-white font-semibold text-sm' : 'bg-white text-gray-900 border border-gray-200 font-medium text-sm hover:bg-gray-50'}`}
                     >
                       {action.label}
                     </button>
@@ -92,15 +94,15 @@ export default function UserDashboard() {
                 </div>
               </div>
               {/* Upcoming Tasks */}
-              <div className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Upcoming Tasks</h2>
-                <ul className="space-y-4">
+              <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+                <h2 className="text-xl font-bold text-gray-900 mb-4">Upcoming Tasks</h2>
+                <ul className="space-y-3">
                   {tasks.map((task, i) => (
-                    <li key={i} className="flex items-center gap-3">
-                      <span className={`w-3 h-3 rounded-full ${task.color}`}></span>
+                    <li key={i} className="flex items-center gap-2">
+                      <span className={`w-2 h-2 rounded-full ${task.color}`}></span>
                       <div>
-                        <div className="font-medium text-gray-900">{task.label}</div>
-                        <div className="text-sm text-gray-500">{task.date}</div>
+                        <div className="font-medium text-gray-900 text-sm">{task.label}</div>
+                        <div className="text-xs text-gray-500">{task.date}</div>
                       </div>
                     </li>
                   ))}

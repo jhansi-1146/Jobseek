@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import Layout from '../../components/Layout';
 import {
@@ -144,7 +143,6 @@ const FilterSection = ({
 }: any) => {
     // Calculate the percentage for the slider's background
     const percentage = (salaryRange / 200000) * 100;
-
     return (
         <div className="bg-white p-6 rounded-lg shadow-md h-full overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
@@ -283,16 +281,16 @@ const FilterSection = ({
 const JobCard = ({ job, onSelectJob }: { job: Job, onSelectJob: (job: Job) => void }) => {
     return (
         <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-            <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                    <Briefcase className="w-6 h-6 text-blue-600" />
-                    <h3 className="text-xl font-bold text-gray-900">{job.title}</h3>
+            <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center space-x-2">
+                    <Briefcase className="w-5 h-5 text-blue-600" />
+                    <h3 className="text-lg font-bold text-gray-900">{job.title}</h3>
                 </div>
                 {job.isRemote && (
                     <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded-full">Remote</span>
                 )}
             </div>
-            <div className="text-gray-600 space-y-2 mb-4">
+            <div className="text-gray-600 text-sm space-y-1 mb-3">
                 <div className="flex items-center space-x-2">
                     <Building2 className="w-4 h-4 text-gray-500" />
                     <span>{job.company}</span>
@@ -310,29 +308,29 @@ const JobCard = ({ job, onSelectJob }: { job: Job, onSelectJob: (job: Job) => vo
                     <span>{job.salary}</span>
                 </div>
             </div>
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-1 mb-3">
                 {job.skills.map((skill, index) => (
                     <span key={index} className="bg-gray-200 text-gray-700 text-xs font-medium px-2 py-1 rounded-full">
                         {skill}
                     </span>
                 ))}
             </div>
-            <p className="text-sm text-gray-500 line-clamp-2 mb-4">{job.description}</p>
-            <div className="flex justify-between items-center mt-4">
+            <p className="text-xs text-gray-500 line-clamp-2 mb-3">{job.description}</p>
+            <div className="flex justify-between items-center mt-3">
                 <span className="text-xs text-gray-400">{job.postedDate}</span>
-                <div className="flex space-x-3">
+                <div className="flex space-x-2 items-center">
                     <button
                         onClick={() => onSelectJob(job)}
-                        className="flex items-center space-x-1 text-blue-600 font-semibold text-sm hover:text-blue-800 transition-colors"
+                        className="flex items-center space-x-1 text-blue-600 font-semibold text-xs hover:text-blue-800 transition-colors"
                     >
                         <span>View Details</span>
                         <ChevronDown className="w-4 h-4" />
                     </button>
-                    <button className="flex items-center space-x-1 text-gray-600 font-semibold text-sm hover:text-gray-800 transition-colors">
+                    <button className="flex items-center space-x-1 text-gray-600 font-semibold text-xs hover:text-gray-800 transition-colors">
                         <Share2 className="w-4 h-4" />
                         <span>Share</span>
                     </button>
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors">
+                    <button className="bg-blue-600 text-white px-3 py-1 rounded-lg font-semibold text-xs hover:bg-blue-700 transition-colors">
                         Apply Now
                     </button>
                 </div>
@@ -422,6 +420,7 @@ const JobDetailsPage = ({ job, onBack }: { job: Job, onBack: () => void }) => {
                         <h2 className="text-2xl font-bold text-gray-900 mb-4">About the Job</h2>
                         <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{job.description}</p>
                     </div>
+
                     {/* Skills required */}
                     <div>
                         <h2 className="text-2xl font-bold text-gray-900 mb-4">Skill(s) Required</h2>
@@ -433,6 +432,7 @@ const JobDetailsPage = ({ job, onBack }: { job: Job, onBack: () => void }) => {
                             ))}
                         </div>
                     </div>
+
                     {/* Who can apply */}
                     <div>
                         <h2 className="text-2xl font-bold text-gray-900 mb-4">Who can apply</h2>
@@ -475,7 +475,6 @@ const JobDetailsPage = ({ job, onBack }: { job: Job, onBack: () => void }) => {
                             </button>
                         </div>
                     </div>
-
                     <div className="bg-gray-50 p-6 rounded-lg border">
                         <h3 className="text-xl font-bold text-gray-900 mb-4">About {job.company}</h3>
                         <p className="text-gray-700 leading-relaxed">
@@ -508,42 +507,6 @@ const FindJobsPage = () => {
         setSelectedJob(null);
     };
 
-    const filteredJobs = mockJobs.filter(job => {
-        const salaryMatch = parseInt(job.salary.replace(/₹|K|,/g, '')) * 1000 >= salaryRange;
-        const workTypeMatch = workType.length === 0 || workType.includes(job.jobType);
-        const experienceMatch = experienceLevel.length === 0 || experienceLevel.includes(job.experience);
-        const locationTypeMatch = locationType.length === 0 || (locationType.includes('Remote') && job.isRemote) || (locationType.includes('On-site') && !job.isRemote);
-        const companySizeMatch = companySize.length === 0 || companySize.includes(job.companySize);
-        const platformMatch = platforms.length === 0 || platforms.includes(job.platform);
-        const searchTermMatch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            job.location.toLowerCase().includes(searchTerm.toLowerCase());
-
-        return salaryMatch && workTypeMatch && experienceMatch && locationTypeMatch && companySizeMatch && platformMatch && searchTermMatch;
-    });
-
-    const handleCheckboxChange = (filterName: string, value: string) => {
-        switch (filterName) {
-            case 'workType':
-                setWorkType(prev => prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]);
-                break;
-            case 'experienceLevel':
-                setExperienceLevel(prev => prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]);
-                break;
-            case 'locationType':
-                setLocationType(prev => prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]);
-                break;
-            case 'companySize':
-                setCompanySize(prev => prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]);
-                break;
-            case 'platforms':
-                setPlatforms(prev => prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]);
-                break;
-            default:
-                break;
-        }
-    };
-
     const handleClearFilters = () => {
         setSalaryRange(0);
         setWorkType([]);
@@ -553,108 +516,152 @@ const FindJobsPage = () => {
         setPlatforms([]);
     };
 
+    const handleCheckboxChange = (filterType: keyof typeof filterOptions, value: string) => {
+        const setMap = {
+            workType: setWorkType,
+            experienceLevel: setExperienceLevel,
+            locationType: setLocationType,
+            companySize: setCompanySize,
+            platforms: setPlatforms,
+        };
+        const setter = setMap[filterType];
+        if (!setter) return;
+
+        setter((prev: string[]) => {
+            if (prev.includes(value)) {
+                return prev.filter(item => item !== value);
+            } else {
+                return [...prev, value];
+            }
+        });
+    };
+
+    const filteredJobs = mockJobs.filter(job => {
+        const titleMatches = job.title.toLowerCase().includes(searchTerm.toLowerCase());
+        const salaryMatches = parseInt(job.salary.split(' - ')[0].replace('₹', '').replace('K', '')) >= (salaryRange / 1000);
+        const workTypeMatches = workType.length === 0 || workType.includes(job.jobType);
+        const experienceMatches = experienceLevel.length === 0 || experienceLevel.includes(job.experience);
+        const locationTypeMatches = locationType.length === 0 || (locationType.includes('Remote') && job.isRemote) || (locationType.includes('On-site') && !job.isRemote);
+        const companySizeMatches = companySize.length === 0 || companySize.includes(job.companySize);
+        const platformMatches = platforms.length === 0 || platforms.includes(job.platform);
+
+        return titleMatches && salaryMatches && workTypeMatches && experienceMatches && locationTypeMatches && companySizeMatches && platformMatches;
+    });
+
+    if (selectedJob) {
+        return <JobDetailsPage job={selectedJob} onBack={handleBack} />;
+    }
+
     return (
         <Layout>
-            <div className="bg-gray-100 min-h-screen font-sans p-6">
-                {/* This is the custom CSS for the salary slider track. */}
-                <style>
-                    {`
-                    .salary-slider::-webkit-slider-runnable-track {
-                        background: linear-gradient(to right, #2563EB var(--slider-percent), #E5E7EB var(--slider-percent));
-                        border-radius: 9999px;
-                        height: 8px;
-                    }
-
-                    .salary-slider::-moz-range-track {
-                        background: linear-gradient(to right, #2563EB var(--slider-percent), #E5E7EB var(--slider-percent));
-                        border-radius: 9999px;
-                        height: 8px;
-                    }
-
-                    .salary-slider::-webkit-slider-thumb {
-                        -webkit-appearance: none;
-                        appearance: none;
-                        width: 16px;
-                        height: 16px;
-                        background-color: #2563EB;
-                        border-radius: 50%;
-                        border: 2px solid white;
-                        margin-top: -4px;
-                    }
-
-                    .salary-slider::-moz-range-thumb {
-                        width: 16px;
-                        height: 16px;
-                        background-color: #2563EB;
-                        border-radius: 50%;
-                        border: 2px solid white;
-                    }
-                    `}
-                </style>
-
-                {/* Conditional Rendering based on selectedJob state */}
-                {selectedJob ? (
-                    <JobDetailsPage job={selectedJob} onBack={handleBack} />
-                ) : (
-                    <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6">
-                        {/* Filter Section */}
-                        <div className={`${showFilters ? 'block' : 'hidden'} md:block md:w-72 md:flex-none`}>
-                            <FilterSection
-                                salaryRange={salaryRange}
-                                setSalaryRange={setSalaryRange}
-                                workType={workType}
-                                handleCheckboxChange={handleCheckboxChange}
-                                experienceLevel={experienceLevel}
-                                locationType={locationType}
-                                companySize={companySize}
-                                platforms={platforms}
-                                handleClearFilters={handleClearFilters}
+            <style jsx>{`
+                .salary-slider::-webkit-slider-runnable-track {
+                    background: linear-gradient(to right, #2563EB var(--slider-percent), #e5e7eb var(--slider-percent));
+                    height: 8px;
+                    border-radius: 9999px;
+                }
+                .salary-slider::-moz-range-track {
+                    background: linear-gradient(to right, #2563EB var(--slider-percent), #e5e7eb var(--slider-percent));
+                    height: 8px;
+                    border-radius: 9999px;
+                }
+                .salary-slider::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    background-color: #2563EB;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    border: 2px solid #fff;
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+                    transform: translateY(-20%);
+                    cursor: pointer;
+                }
+                .salary-slider::-moz-range-thumb {
+                    background-color: #2563EB;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    border: 2px solid #fff;
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+                    transform: translateY(-20%);
+                    cursor: pointer;
+                }
+            `}</style>
+            <div className="min-h-screen bg-white p-4 sm:p-6 lg:p-8">
+                {/* Search and Filters Header */}
+                <div className="mb-8">
+                    <h1 className="text-2xl font-bold text-gray-900 mb-4">Find Your Dream Job</h1>
+                    <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
+                        <div className="relative w-full md:w-2/3">
+                            <Search className="absolute left-3 top-[35%] w-4 h-4 text-gray-500" />
+                            <input
+                                type="text"
+                                placeholder="Search by title, company, or keyword..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="w-full py-2 pl-10 pr-4 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
                             />
                         </div>
-
-                        {/* Job Listings Section */}
-                        <div className="w-full flex-auto min-w-0">
-                            {/* Search and Filter toggle on mobile */}
-                            <div className="flex flex-col md:flex-row items-center justify-between mb-6">
-                                <div className="relative flex items-center w-full max-w-2xl mx-auto md:mx-0">
-  <Search className="absolute left-3 w-5 h-5 text-gray-500" />
-  <input
-    type="text"
-    placeholder="Search for Jobs..."
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-    className="w-full py-3 pl-10 pr-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 shadow-sm"
-  />
-</div>
-                                <button
-                                    onClick={() => setShowFilters(!showFilters)}
-                                    className="md:hidden w-full py-3 px-6 rounded-lg bg-blue-600 text-white font-semibold flex items-center justify-center space-x-2 shadow-md hover:bg-blue-700 transition-colors"
-                                >
-                                    <Filter className="w-5 h-5" />
-                                    <span>{showFilters ? 'Hide Filters' : 'Show Filters'}</span>
-                                </button>
-                            </div>
-
-                            {/* Job Cards Grid */}
-                            <div className="grid grid-cols-1 gap-6">
-                                {filteredJobs.length > 0 ? (
-                                    filteredJobs.map(job => (
-                                        <JobCard key={job.id} job={job} onSelectJob={handleViewDetails} />
-                                    ))
-                                ) : (
-                                    <div className="text-center py-10 col-span-full">
-                                        <p className="text-gray-500 font-medium">No jobs found matching your criteria.</p>
-                                    </div>
-                                )}
-                            </div>
+                        <div className="w-full md:w-1/3 flex space-x-4">
+                            <button
+                                onClick={() => setShowFilters(!showFilters)}
+                                className="md:hidden w-full py-2 px-6 rounded-lg bg-blue-600 text-white font-semibold flex items-center justify-center space-x-2 shadow-md hover:bg-blue-700 transition-colors text-sm"
+                            >
+                                <Filter className="w-4 h-4" />
+                                <span>{showFilters ? 'Hide Filters' : 'Show Filters'}</span>
+                            </button>
                         </div>
                     </div>
-                )}
+                </div>
+
+                {/* Main Content Area */}
+                <div className="flex flex-col lg:flex-row gap-8">
+                    {/* Filters Sidebar */}
+                    <div className={`lg:w-1/4 ${showFilters ? 'block' : 'hidden'} md:block transition-all duration-300 ease-in-out`}>
+                        <FilterSection
+                            salaryRange={salaryRange}
+                            setSalaryRange={setSalaryRange}
+                            workType={workType}
+                            handleCheckboxChange={handleCheckboxChange}
+                            experienceLevel={experienceLevel}
+                            locationType={locationType}
+                            companySize={companySize}
+                            platforms={platforms}
+                            handleClearFilters={handleClearFilters}
+                        />
+                    </div>
+
+                    {/* Job Listings */}
+                    <div className="flex-1">
+                        <div className="mb-4 flex items-center justify-between">
+                            <h2 className="text-xl font-bold text-gray-900">Job Listings ({filteredJobs.length})</h2>
+                            <div className="hidden md:flex items-center space-x-2 text-gray-600 text-sm">
+                                <span>Sort by:</span>
+                                <select className="bg-white p-2 rounded-lg border border-gray-300 text-sm">
+                                    <option>Relevance</option>
+                                    <option>Date Posted</option>
+                                    <option>Salary</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="grid gap-4">
+                            {filteredJobs.length > 0 ? (
+                                filteredJobs.map(job => (
+                                    <JobCard key={job.id} job={job} onSelectJob={handleViewDetails} />
+                                ))
+                            ) : (
+                                <div className="text-center py-10 text-gray-500">
+                                    <AlertCircle className="w-10 h-10 mx-auto mb-2" />
+                                    <p className="text-sm">No jobs found matching your criteria.</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
             </div>
         </Layout>
     );
 };
 
 export default FindJobsPage;
-
-

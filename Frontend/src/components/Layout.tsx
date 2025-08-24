@@ -90,30 +90,6 @@ const Layout: React.FC<LayoutProps> = ({ children, role, viewMode: propViewMode,
 
   const menuItems = role === 'student' ? studentMenuItems : adminMenuItems;
 
-  const generateBreadcrumbs = () => {
-    const pathSegments = location.pathname.split('/').filter(Boolean);
-    const breadcrumbs = [];
-
-    if (pathSegments.length > 0) {
-      breadcrumbs.push({ label: 'Home', path: '/' });
-
-      if (pathSegments[0] === 'user' || pathSegments[0] === 'admin') {
-        breadcrumbs.push({
-          label: pathSegments[0] === 'user' ? 'Student Portal' : 'Admin Portal',
-          path: `/${pathSegments[0]}`
-        });
-
-        if (pathSegments[1]) {
-          const currentItem = menuItems.find(item => item.path === `/${pathSegments[0]}/${pathSegments[1]}`);
-          if (currentItem) {
-            breadcrumbs.push({ label: currentItem.label, path: currentItem.path });
-          }
-        }
-      }
-    }
-    return breadcrumbs;
-  };
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -172,13 +148,11 @@ const Layout: React.FC<LayoutProps> = ({ children, role, viewMode: propViewMode,
     setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
   };
 
-  const breadcrumbs = generateBreadcrumbs();
-
   return (
     <div className="h-screen bg-background flex flex-row">
       <div className={`sidebar-container z-40 h-full bg-white border-r border-gray-100 flex-shrink-0
-                   ${sidebarWidthClass} transition-all duration-300 ease-in-out
-                   ${sidebarState === 'closed' ? 'hidden lg:flex' : 'block fixed lg:relative'}`}>
+                     ${sidebarWidthClass} transition-all duration-300 ease-in-out
+                     ${sidebarState === 'closed' ? 'hidden lg:flex' : 'block fixed lg:relative'}`}>
         <Sidebar isCollapsed={isSidebarCollapsed} />
       </div>
 
@@ -187,130 +161,113 @@ const Layout: React.FC<LayoutProps> = ({ children, role, viewMode: propViewMode,
       )}
 
       <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out`}>
-        <nav className="bg-white border-b border-gray-200 px-5 py-4 flex items-center justify-between flex-shrink-0">
-          <div className="flex items-center gap-5 w-full">
-            <button className="menu-button p-2 rounded-md hover:bg-gray-100 mr-3" aria-label="Toggle sidebar" onClick={handleSidebarToggle}>
-              <Menu className="h-6 w-6 text-gray-600" />
+        <nav className="bg-white border-b border-gray-200 py-3 flex items-center justify-between flex-shrink-0">
+          <div className="flex items-center gap-4 flex-shrink-0 px-10">
+            <button className="menu-button p-2 rounded-md hover:bg-gray-100" aria-label="Toggle sidebar" onClick={handleSidebarToggle}>
+              <Menu className="h-5 w-5 text-gray-600" />
             </button>
-            <span className="text-2xl font-extrabold text-blue-700 tracking-tight whitespace-nowrap">
+            <span className="text-xl font-bold text-gray-900 whitespace-nowrap">
               Career Companion
             </span>
-            <div className="flex-1 flex items-center ml-8">
-              <div className="relative w-full max-w-md flex items-center">
-                <Search className="h-5 w-5 text-gray-400 absolute left-3" />
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="pl-11 pr-4 py-2.5 rounded-xl bg-gray-50 border-none focus:ring-2 focus:ring-blue-500 focus:outline-none w-full text-lg text-gray-700 placeholder-gray-400 shadow-sm"
-                />
-              </div>
-            </div>
-            <div className="flex items-center gap-4 ml-8 relative profile-dropdown-container">
-              <div className="relative notification-dropdown-container">
-                <button
-                  className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 bg-white hover:bg-blue-50 transition"
-                  onClick={handleBellClick}
-                  aria-haspopup="true"
-                  aria-expanded={notificationOpen}
-                >
-                  <Bell className="h-6 w-6 text-blue-600" />
-                  {unreadNotificationsCount > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                      {unreadNotificationsCount}
-                    </span>
-                  )}
-                </button>
+          </div>
 
-                {notificationOpen && (
-                  <div className="absolute right-0 top-full mt-3 w-80 bg-white rounded-md shadow-lg py-2 ring-1 ring-black ring-opacity-5 z-50 max-h-80 overflow-y-auto">
-                    <div className="px-4 py-2 text-sm font-semibold text-gray-800 border-b border-gray-100">Notifications</div>
-                    {notifications.length === 0 ? (
-                      <div className="px-4 py-3 text-sm text-gray-500">No new notifications.</div>
-                    ) : (
-                      notifications.map((notification) => (
-                        <div
-                          key={notification.id}
-                          className={`flex items-center px-4 py-2 border-b border-gray-100 last:border-b-0
+          <div className="flex-grow flex items-center justify-center px-8">
+            <div className="relative w-full max-w-6xl">
+              <Search className="h-4 w-5 text-gray-500 absolute left-4 top-1/4 transform -translate-y-1/2" />
+              <input
+                type="text"
+                placeholder="Search for jobs or companies..."
+                className="pl-12 pr-4 py-1.5 rounded-xl bg-gray-50 border border-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none w-full text-sm text-gray-700 placeholder-gray-600 shadow-sm transition-all"
+              />
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-4 relative profile-dropdown-container flex-shrink-0 px-10">
+            <div className="relative notification-dropdown-container">
+              <button
+                className="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 bg-white hover:bg-gray-100 transition"
+                onClick={handleBellClick}
+                aria-haspopup="true"
+                aria-expanded={notificationOpen}
+              >
+                <Bell className="h-5 w-5 text-gray-600" />
+                {unreadNotificationsCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                    {unreadNotificationsCount}
+                  </span>
+                )}
+              </button>
+
+              {notificationOpen && (
+                <div className="absolute right-0 top-full mt-3 w-80 bg-white rounded-md shadow-lg py-2 ring-1 ring-black ring-opacity-5 z-50 max-h-80 overflow-y-auto">
+                  <div className="px-4 py-2 text-sm font-semibold text-gray-800 border-b border-gray-100">Notifications</div>
+                  {notifications.length === 0 ? (
+                    <div className="px-4 py-3 text-sm text-gray-500">No new notifications.</div>
+                  ) : (
+                    notifications.map((notification) => (
+                      <div
+                        key={notification.id}
+                        className={`flex items-center px-4 py-2 border-b border-gray-100 last:border-b-0
                                    ${notification.read ? 'bg-white text-gray-700' : 'bg-blue-50 text-gray-900 font-medium hover:bg-blue-100'}
                                    cursor-pointer`}
-                          onClick={() => handleNotificationClick(notification.id)}
-                        >
-                          {!notification.read && (
-                            <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0 mr-2"></div>
-                          )}
-                          <div className="flex flex-col flex-grow">
-                            <span className="text-sm">{notification.message}</span>
-                            <span className={`text-xs ${notification.read ? 'text-gray-500' : 'text-blue-600'}`}>{notification.time}</span>
-                          </div>
+                        onClick={() => handleNotificationClick(notification.id)}
+                      >
+                        {!notification.read && (
+                          <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0 mr-2"></div>
+                        )}
+                        <div className="flex flex-col flex-grow">
+                          <span className="text-sm">{notification.message}</span>
+                          <span className={`text-xs ${notification.read ? 'text-gray-500' : 'text-blue-600'}`}>{notification.time}</span>
                         </div>
-                      ))
-                    )}
-                    <div className="border-t border-gray-100 my-1" />
-                    <button
-                      onClick={() => { setNotificationOpen(false); }}
-                      className="w-full text-center px-4 py-2 text-sm text-blue-600 hover:bg-blue-50"
-                    >
-                      View All
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              <button
-                className="w-10 h-10 rounded-full flex items-center justify-center bg-blue-100 font-bold text-blue-700 text-base flex-shrink-0 cursor-pointer hover:bg-blue-200 transition"
-                onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                aria-haspopup="true"
-                aria-expanded={profileDropdownOpen}
-              >
-                CS
-              </button>
-              <span className="font-medium text-gray-900 ml-3 whitespace-nowrap text-lg">Chinmayi Sharma</span>
-
-              {profileDropdownOpen && (
-                <div className="absolute right-0 top-full mt-3 w-56 bg-white rounded-md shadow-lg py-2 ring-1 ring-black ring-opacity-5 z-50">
+                      </div>
+                    ))
+                  )}
+                  <div className="border-t border-gray-100 my-1" />
                   <button
-                    onClick={handleProfileClick}
-                    className="flex items-center px-5 py-2.5 text-base text-gray-700 hover:bg-gray-100 w-full text-left"
+                    onClick={() => { setNotificationOpen(false); }}
+                    className="w-full text-center px-4 py-2 text-sm text-blue-600 hover:bg-blue-50"
                   >
-                    <User className="mr-3 h-5 w-5 text-gray-500" /> My Profile
-                  </button>
-                  <button
-                    onClick={handleSettingsClick}
-                    className="flex items-center px-5 py-2.5 text-base text-gray-700 hover:bg-gray-100 w-full text-left"
-                  >
-                    <Settings className="mr-3 h-5 w-5 text-gray-500" /> Settings
-                  </button>
-                  <div className="border-t border-gray-100 my-1.5" />
-                  <button
-                    onClick={handleLogout}
-                    className="flex items-center px-5 py-2.5 text-base text-red-600 hover:bg-red-50 hover:text-red-700 w-full text-left"
-                  >
-                    <LogOut className="mr-3 h-5 w-5 text-red-500" /> Logout
+                    View All
                   </button>
                 </div>
               )}
             </div>
+
+            <button
+              className="w-9 h-9 rounded-full flex items-center justify-center bg-blue-100 font-bold text-blue-700 text-xs flex-shrink-0 cursor-pointer hover:bg-blue-200 transition"
+              onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+              aria-haspopup="true"
+              aria-expanded={profileDropdownOpen}
+            >
+              CS
+            </button>
+            <span className="font-medium text-gray-900 ml-3 whitespace-nowrap text-base">Chinmayi Sharma</span>
+            
+            {profileDropdownOpen && (
+              <div className="absolute right-0 top-full mt-3 w-56 bg-white rounded-md shadow-lg py-2 ring-1 ring-black ring-opacity-5 z-50">
+                <button
+                  onClick={handleProfileClick}
+                  className="flex items-center px-5 py-2.5 text-base text-gray-700 hover:bg-gray-100 w-full text-left"
+                >
+                  <User className="mr-3 h-5 w-5 text-gray-500" /> My Profile
+                </button>
+                <button
+                  onClick={handleSettingsClick}
+                  className="flex items-center px-5 py-2.5 text-base text-gray-700 hover:bg-gray-100 w-full text-left"
+                >
+                  <Settings className="mr-3 h-5 w-5 text-gray-500" /> Settings
+                </button>
+                <div className="border-t border-gray-100 my-1.5" />
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center px-5 py-2.5 text-base text-red-600 hover:bg-red-50 hover:text-red-700 w-full text-left"
+                >
+                  <LogOut className="mr-3 h-5 w-5 text-red-500" /> Logout
+                </button>
+              </div>
+            )}
           </div>
         </nav>
-        {breadcrumbs.length > 1 && (
-          <div className="bg-white border-b border-gray-200 px-6 py-3 flex-shrink-0">
-            <nav className="flex items-center space-x-2 text-sm">
-              {breadcrumbs.map((breadcrumb, index) => (
-                <div key={index} className="flex items-center">
-                  {index > 0 && <ChevronRight className="h-4 w-4 text-gray-400 mx-2" />}
-                  <button
-                    onClick={() => navigate(breadcrumb.path)}
-                    className={`hover:text-blue-600 ${
-                      index === breadcrumbs.length - 1 ? 'text-gray-900 font-medium' : 'text-gray-500'
-                    }`}
-                  >
-                    {breadcrumb.label}
-                  </button>
-                </div>
-              ))}
-            </nav>
-          </div>
-        )}
         <div className="flex-1 overflow-auto min-w-0">
           {children}
         </div>

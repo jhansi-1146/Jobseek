@@ -11,7 +11,7 @@ export default {
           DEFAULT: "#18181b", // dark sidebar
         },
         primary: {
-          DEFAULT: "#2563eb", // blue
+          DEFAULT: "#1A4F8A", // Updated to a much darker blue
         },
         background: {
           DEFAULT: "#f3f4f6", // light gray

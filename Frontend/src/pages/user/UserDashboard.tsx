@@ -4,14 +4,14 @@ import { Search, Bell, Settings as SettingsIcon, User as UserIcon } from 'lucide
 import Layout from '../../components/Layout';
 
 const stats = [
-  { value: 23, label: 'Applications Sent', sub: '+3 this week', color: 'text-blue-700' },
-  { value: 5, label: 'Interviews Scheduled', sub: '+2 this week', color: 'text-blue-700' },
-  { value: '8.2/10', label: 'Skill Gap Score', sub: 'Improved 0.5', color: 'text-blue-700' },
-  { value: 156, label: 'Profile Views', sub: '+12 today', color: 'text-blue-700' },
+  { value: 23, label: 'Applications Sent', sub: '+3 this week', color: 'text-primary' }, // Updated color
+  { value: 5, label: 'Interviews Scheduled', sub: '+2 this week', color: 'text-primary' }, // Updated color
+  { value: '8.2/10', label: 'Skill Gap Score', sub: 'Improved 0.5', color: 'text-primary' }, // Updated color
+  { value: 156, label: 'Profile Views', sub: '+12 today', color: 'text-primary' }, // Updated color
 ];
 
 const applications = [
-  { title: 'Senior Software Engineer', company: 'TechCorp Inc.', date: '2 days ago', status: 'Interview', statusColor: 'bg-blue-700 text-white' },
+  { title: 'Senior Software Engineer', company: 'TechCorp Inc.', date: '2 days ago', status: 'Interview', statusColor: 'bg-primary text-white' }, // Updated color
   { title: 'Data Scientist', company: 'DataFlow Systems', date: '1 week ago', status: 'Applied', statusColor: 'bg-gray-100 text-gray-700' },
   { title: 'DevOps Engineer', company: 'CloudNine Solutions', date: '2 weeks ago', status: 'Rejected', statusColor: 'bg-red-500 text-white' },
 ];
@@ -33,7 +33,7 @@ export default function UserDashboard() {
 
   return (
     <Layout role="student">
-      <main className="bg-gray-50 min-h-screen py-10">
+      <main className="bg-background min-h-screen py-10">
         <div className="max-w-full">
           {/* Greeting & Stats */}
           <div className="px-4 md:px-8">
@@ -86,7 +86,7 @@ export default function UserDashboard() {
                     <button
                       key={i}
                       onClick={() => navigate(action.path)}
-                      className={`w-full py-2.5 rounded ${action.primary ? 'bg-blue-700 text-white font-semibold text-sm' : 'bg-white text-gray-900 border border-gray-200 font-medium text-sm hover:bg-gray-50'}`}
+                      className={`w-full py-2.5 rounded ${action.primary ? 'bg-primary text-white font-semibold text-sm' : 'bg-white text-gray-900 border border-gray-200 font-medium text-sm hover:bg-gray-50'}`}
                     >
                       {action.label}
                     </button>

@@ -49,12 +49,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
         <aside className={`bg-white h-full flex flex-col select-none border-r border-gray-200
             ${isCollapsed ? 'w-14' : 'w-56'} transition-all duration-300 ease-in-out`}>
             {/* Logo and App Name */}
-            <div className={`flex items-center h-16 px-4 border-b border-gray-200 ${isCollapsed ? 'justify-center' : 'px-6'}`}>
+            <div className={`flex items-center h-16 px-4 ${isCollapsed ? 'justify-center' : 'px-6'} border-b border-gray-200`}>
                 {!isCollapsed && (
-                    <span className="text-lg font-extrabold text-blue-700 tracking-tight whitespace-nowrap">Student Portal</span>
+                    <span className="text-lg font-extrabold text-[#1a4f8a] tracking-tight whitespace-nowrap">Student Portal</span>
                 )}
                 {isCollapsed && (
-                    <GraduationCap className="h-8 w-8 text-blue-600" />
+                    <GraduationCap className="h-8 w-8 text-[#1a4f8a]" />
                 )}
             </div>
             <nav className="flex-1 flex flex-col justify-between py-6">
@@ -62,16 +62,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
                     {menu.map((item, idx) => {
                         const Icon = item.icon;
                         const route = getRoute(item.id);
-                        const isSelected = route && location.pathname.startsWith(route);
+                        const isSelected = route && location.pathname === route; // Fixed logic here
                         return (
                             <li key={item.id}>
                                 <button
                                     className={`w-full flex items-center gap-3 py-2.5 rounded-lg transition-colors duration-200
-                                        ${isSelected ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-600 hover:bg-gray-50'}
+                                        ${isSelected ? 'bg-[#e6f0f8] text-[#1a4f8a] font-semibold' : 'text-gray-600 hover:bg-gray-50'}
                                         ${isCollapsed ? 'justify-center px-0' : 'px-4'}`}
                                     onClick={() => route && navigate(route)}
                                 >
-                                    <Icon className={`h-5 w-5 ${isSelected ? 'text-blue-700' : 'text-gray-400'} transition-colors`} />
+                                    <Icon className={`h-5 w-5 ${isSelected ? 'text-[#1a4f8a]' : 'text-gray-400'} transition-colors`} />
                                     {!isCollapsed && (
                                         <span className="text-sm font-medium whitespace-nowrap">{item.label}</span>
                                     )}

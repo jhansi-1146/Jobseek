@@ -42,7 +42,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, role, viewMode: propViewMode, onViewModeChange }) => {
   const location = useLocation();
-  const [sidebarState, setSidebarState] = useState<'closed' | 'full' | 'collapsed'>('closed');
+  const [sidebarState, setSidebarState] = useState<'closed' | 'full' | 'collapsed'>('full');
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [filterModalOpen, setFilterModalOpen] = useState(false);
@@ -71,6 +71,9 @@ const Layout: React.FC<LayoutProps> = ({ children, role, viewMode: propViewMode,
   const isSidebarOpen = sidebarState !== 'closed';
   const isSidebarCollapsed = sidebarState === 'collapsed';
   const sidebarWidthClass = isSidebarCollapsed ? 'w-14' : 'w-56';
+
+  // This is the updated line to match the desired behavior
+  const searchbarWidthClass = isSidebarCollapsed ? 'max-w-xl' : 'max-w-sm';
 
   const studentMenuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home, path: '/user' },
@@ -150,9 +153,9 @@ const Layout: React.FC<LayoutProps> = ({ children, role, viewMode: propViewMode,
 
   return (
     <div className="h-screen bg-background flex flex-row">
-      <div className={`sidebar-container z-40 h-full bg-white border-r border-gray-100 flex-shrink-0
-                     ${sidebarWidthClass} transition-all duration-300 ease-in-out
-                     ${sidebarState === 'closed' ? 'hidden lg:flex' : 'block fixed lg:relative'}`}>
+      <div className={`sidebar-container z-40 h-full bg-white flex-shrink-0 flex flex-col
+                         ${sidebarWidthClass} transition-all duration-300 ease-in-out
+                         ${sidebarState === 'closed' ? 'hidden lg:flex' : 'block fixed lg:relative'}`}>
         <Sidebar isCollapsed={isSidebarCollapsed} />
       </div>
 
@@ -161,28 +164,33 @@ const Layout: React.FC<LayoutProps> = ({ children, role, viewMode: propViewMode,
       )}
 
       <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out`}>
-        <nav className="bg-white border-b border-gray-200 py-3 flex items-center justify-between flex-shrink-0">
-          <div className="flex items-center gap-4 flex-shrink-0 px-10">
+        <nav className="bg-white border-b border-gray-200 h-16 flex items-center justify-between flex-shrink-0 px-6">
+          {/* Left section of the navbar with menu button and title */}
+          <div className="flex items-center gap-2 flex-shrink-0">
             <button className="menu-button p-2 rounded-md hover:bg-gray-100" aria-label="Toggle sidebar" onClick={handleSidebarToggle}>
               <Menu className="h-5 w-5 text-gray-600" />
             </button>
-            <span className="text-xl font-bold text-gray-900 whitespace-nowrap">
+            <span className="text-xl font-bold text-[#1a4f8a] whitespace-nowrap">
               Career Companion
             </span>
           </div>
 
-          <div className="flex-grow flex items-center justify-center px-8">
-            <div className="relative w-full max-w-6xl">
-              <Search className="h-4 w-5 text-gray-500 absolute left-4 top-1/4 transform -translate-y-1/2" />
+          {/* Central search bar */}
+          <div className="flex-grow flex items-center justify-center">
+            <div className={`relative w-full ${searchbarWidthClass}`}>
+              <div className="absolute inset-y-0 left-0 flex items-center pl-4">
+                <Search className="h-5 w-5 text-gray-500" />
+              </div>
               <input
                 type="text"
-                placeholder="Search for jobs or companies..."
-                className="pl-12 pr-4 py-1.5 rounded-xl bg-gray-50 border border-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none w-full text-sm text-gray-700 placeholder-gray-600 shadow-sm transition-all"
+                placeholder="Search..."
+                className="pl-12 pr-4 py-2 rounded-xl bg-gray-100 border border-gray-400 focus:ring-2 focus:ring-[#1A4F8A] focus:outline-none w-full text-sm text-gray-700 placeholder-gray-500 shadow-sm transition-all"
               />
             </div>
           </div>
-          
-          <div className="flex items-center gap-4 relative profile-dropdown-container flex-shrink-0 px-10">
+
+          {/* Right section with notifications and profile */}
+          <div className="flex items-center gap-2 relative profile-dropdown-container flex-shrink-0">
             <div className="relative notification-dropdown-container">
               <button
                 className="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 bg-white hover:bg-gray-100 transition"
@@ -199,7 +207,7 @@ const Layout: React.FC<LayoutProps> = ({ children, role, viewMode: propViewMode,
               </button>
 
               {notificationOpen && (
-                <div className="absolute right-0 top-full mt-3 w-80 bg-white rounded-md shadow-lg py-2 ring-1 ring-black ring-opacity-5 z-50 max-h-80 overflow-y-auto">
+                <div className="absolute right-0 top-full mt-3 w-72 bg-white rounded-md shadow-lg py-2 ring-1 ring-black ring-opacity-5 z-50 max-h-80 overflow-y-auto">
                   <div className="px-4 py-2 text-sm font-semibold text-gray-800 border-b border-gray-100">Notifications</div>
                   {notifications.length === 0 ? (
                     <div className="px-4 py-3 text-sm text-gray-500">No new notifications.</div>
@@ -208,16 +216,16 @@ const Layout: React.FC<LayoutProps> = ({ children, role, viewMode: propViewMode,
                       <div
                         key={notification.id}
                         className={`flex items-center px-4 py-2 border-b border-gray-100 last:border-b-0
-                                   ${notification.read ? 'bg-white text-gray-700' : 'bg-blue-50 text-gray-900 font-medium hover:bg-blue-100'}
-                                   cursor-pointer`}
+                                       ${notification.read ? 'bg-white text-gray-700' : 'bg-[#E6F0F8] text-gray-900 font-medium hover:bg-[#D0E0EF]'}
+                                       cursor-pointer`}
                         onClick={() => handleNotificationClick(notification.id)}
                       >
                         {!notification.read && (
-                          <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0 mr-2"></div>
+                          <div className="w-2 h-2 bg-[#1A4F8A] rounded-full flex-shrink-0 mr-2"></div>
                         )}
                         <div className="flex flex-col flex-grow">
                           <span className="text-sm">{notification.message}</span>
-                          <span className={`text-xs ${notification.read ? 'text-gray-500' : 'text-blue-600'}`}>{notification.time}</span>
+                          <span className={`text-xs ${notification.read ? 'text-gray-500' : 'text-[#1A4F8A]'}`}>{notification.time}</span>
                         </div>
                       </div>
                     ))
@@ -225,26 +233,26 @@ const Layout: React.FC<LayoutProps> = ({ children, role, viewMode: propViewMode,
                   <div className="border-t border-gray-100 my-1" />
                   <button
                     onClick={() => { setNotificationOpen(false); }}
-                    className="w-full text-center px-4 py-2 text-sm text-blue-600 hover:bg-blue-50"
+                    className="w-full text-center px-4 py-2 text-sm text-[#1A4F8A] hover:bg-[#E6F0F8]"
                   >
                     View All
                   </button>
                 </div>
               )}
             </div>
-
+              
             <button
-              className="w-9 h-9 rounded-full flex items-center justify-center bg-blue-100 font-bold text-blue-700 text-xs flex-shrink-0 cursor-pointer hover:bg-blue-200 transition"
+              className="w-9 h-9 rounded-full flex items-center justify-center bg-[#1A4F8A] font-bold text-white text-sm flex-shrink-0 cursor-pointer hover:bg-[#123969] transition"
               onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
               aria-haspopup="true"
               aria-expanded={profileDropdownOpen}
             >
               CS
             </button>
-            <span className="font-medium text-gray-900 ml-3 whitespace-nowrap text-base">Chinmayi Sharma</span>
-            
+            <span className="font-medium text-gray-900 whitespace-nowrap text-base">Chinmayi Sharma</span>
+
             {profileDropdownOpen && (
-              <div className="absolute right-0 top-full mt-3 w-56 bg-white rounded-md shadow-lg py-2 ring-1 ring-black ring-opacity-5 z-50">
+              <div className="absolute right-0 top-full mt-3 w-52 bg-white rounded-md shadow-lg py-2 ring-1 ring-black ring-opacity-5 z-50">
                 <button
                   onClick={handleProfileClick}
                   className="flex items-center px-5 py-2.5 text-base text-gray-700 hover:bg-gray-100 w-full text-left"
@@ -269,7 +277,12 @@ const Layout: React.FC<LayoutProps> = ({ children, role, viewMode: propViewMode,
           </div>
         </nav>
         <div className="flex-1 overflow-auto min-w-0">
-          {children}
+          {React.Children.map(children, child => {
+            if (React.isValidElement(child)) {
+              return React.cloneElement(child, { sidebarState });
+            }
+            return child;
+          })}
         </div>
       </div>
       <JobFilters

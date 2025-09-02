@@ -1,6 +1,6 @@
 import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from ai_service_backend.models.skill_extractor import SkillExtractor
+from ai_service.models.skill_extractor import SkillExtractor
 
 text = '''ABHIN KUMAR
 Hyderabad, Telangana | +91 9876543210 | abhin.kumar@example.com |

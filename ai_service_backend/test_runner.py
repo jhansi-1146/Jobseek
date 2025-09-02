@@ -7,7 +7,7 @@ import sys
 
 # Ensure parent directory is on sys.path so `import ai_service` works
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from ai_service import main
+from ai_service_backend import main
 
 def run_server():
     uvicorn.run(main.app, host="127.0.0.1", port=8000)  # Changed to 8000

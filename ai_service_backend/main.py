@@ -5,8 +5,8 @@ from typing import List
 import io
 
 # Import your custom modules
-from ai_service.parsers.resume_parser import ResumeParser
-from ai_service.models.skill_extractor import SkillExtractor
+from ai_service_backend.parsers.resume_parser import ResumeParser
+from ai_service_backend.models.skill_extractor import SkillExtractor
 
 app = FastAPI(title="Resume Parser API")
 
@@ -121,4 +121,4 @@ async def parse_resume(
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("ai_service.main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("ai_service_backend.main:app", host="127.0.0.1", port=8000, reload=True)

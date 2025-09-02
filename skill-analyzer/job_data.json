@@ -1,0 +1,8 @@
+{
+  "skills_required": {
+    "Python": "high",
+    "Django": "high",
+    "SQL": "medium",
+    "React": "low"
+  }
+}

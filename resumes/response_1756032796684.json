@@ -1,0 +1,36 @@
+{
+  "filename": "ABHIN KUMAR.pdf",
+  "name": "Abhin Kumar",
+  "email": "abhin.kumar@example.com",
+  "phone": "+91 9876543210",
+  "skills": [
+    "c",
+    "docker",
+    "fastapi",
+    "git",
+    "java",
+    "javascript",
+    "machine learning",
+    "mongodb",
+    "mysql",
+    "python",
+    "react",
+    "react.js",
+    "rest api",
+    "sql"
+  ],
+  "experience": [
+    "integration, and database optimization. Passionate about building scalable applications and learning",
+    "emerging technologies.",
+    "XYZ University, Hyderabad, Telangana — 2023",
+    "Software Developer Intern — Tech Solutions Pvt Ltd, Hyderabad",
+    "June 2021 – May 2023",
+    "- Designed and implemented REST APIs for internal applications.",
+    "- Worked on database indexing to improve query performance by 30%.",
+    "- Collaborated with a cross-functional team to deliver features on schedule."
+  ],
+  "education": [
+    "b.sc (honours) in computer science, cgpa: 8.9"
+  ],
+  "status": "success"
+}

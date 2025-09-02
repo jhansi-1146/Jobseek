@@ -1,0 +1,28 @@
+{
+  "candidate": "Abhin Kumar",
+  "jobTitle": "Backend Developer",
+  "report": {
+    "matched": [
+      "python",
+      "sql",
+      "docker"
+    ],
+    "missing": [
+      "django",
+      "apis"
+    ],
+    "extra": [
+      "c",
+      "fastapi",
+      "git",
+      "java",
+      "javascript",
+      "machine learning",
+      "mongodb",
+      "mysql",
+      "react",
+      "react.js",
+      "rest api"
+    ]
+  }
+}

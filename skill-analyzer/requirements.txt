@@ -1,0 +1,15 @@
+# Resume Parser (Dev4)
+spacy
+pdfminer.six
+python-docx
+
+# Skill Analyzer (Dev5)
+fuzzywuzzy
+python-Levenshtein
+
+# (Optional) If you later build a web API
+fastapi
+uvicorn
+
+# (Optional) If you want to run in Jupyter/Notebook
+ipykernel

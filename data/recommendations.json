@@ -1,0 +1,28 @@
+{
+  "jobs": [
+    {
+      "title": "Frontend Developer",
+      "company": "Google",
+      "location": "Bangalore, India",
+      "url": "https://careers.google.com/jobs/results/frontend-developer/"
+    },
+    {
+      "title": "Backend Engineer",
+      "company": "Microsoft",
+      "location": "Hyderabad, India",
+      "url": "https://careers.microsoft.com/jobs/backend-engineer/"
+    }
+  ],
+  "courses": [
+    {
+      "title": "React for Beginners",
+      "provider": "Udemy",
+      "url": "https://www.udemy.com/course/react-the-complete-guide/"
+    },
+    {
+      "title": "Advanced Node.js",
+      "provider": "Coursera",
+      "url": "https://www.coursera.org/learn/advanced-nodejs"
+    }
+  ]
+}

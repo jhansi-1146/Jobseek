@@ -1,0 +1,6 @@
+Jane Doe
+Full Stack Developer
+
+Experience in Python, Django, SQL, REST APIs, and Docker.
+Worked with AWS and Kubernetes for deployment.
+Strong teamwork and problem-solving skills.

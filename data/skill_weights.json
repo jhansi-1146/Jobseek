@@ -1,0 +1,42 @@
+{
+  "Python": 3,
+  "JavaScript": 2,
+  "Java": 2,
+  "C++": 3,
+  "Go": 2,
+  "Ruby": 1,
+
+  "Django": 3,
+  "Flask": 2,
+  "FastAPI": 2,
+  "React": 3,
+  "Angular": 2,
+  "Vue.js": 1,
+
+  "MongoDB": 2,
+  "MySQL": 2,
+  "PostgreSQL": 2,
+  "SQLite": 1,
+
+  "AWS": 3,
+  "GCP": 2,
+  "Azure": 2,
+  "Heroku": 1,
+
+  "Pandas": 2,
+  "NumPy": 2,
+  "Scikit-learn": 2,
+  "TensorFlow": 3,
+  "PyTorch": 3,
+
+  "Docker": 2,
+  "Kubernetes": 2,
+  "Git": 2,
+  "CI/CD": 1,
+  "Linux": 2,
+
+  "Communication": 1,
+  "Teamwork": 1,
+  "Problem Solving": 2,
+  "Leadership": 2
+}

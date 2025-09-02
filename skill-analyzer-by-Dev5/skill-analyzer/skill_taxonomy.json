@@ -1,0 +1,50 @@
+{
+    "Programming Languages": [
+        "Python",
+        "JavaScript",
+        "Java",
+        "C++",
+        "Go",
+        "Ruby"
+    ],
+    "Web Frameworks": [
+        "Django",
+        "Flask",
+        "FastAPI",
+        "React",
+        "Angular",
+        "Vue.js"
+    ],
+    "Databases": [
+        "MongoDB",
+        "MySQL",
+        "PostgreSQL",
+        "SQLite"
+    ],
+    "Cloud Platforms": [
+        "AWS",
+        "GCP",
+        "Azure",
+        "Heroku"
+    ],
+    "Data Science": [
+        "Pandas",
+        "NumPy",
+        "Scikit-learn",
+        "TensorFlow",
+        "PyTorch"
+    ],
+    "DevOps & Tools": [
+        "Docker",
+        "Kubernetes",
+        "Git",
+        "CI/CD",
+        "Linux"
+    ],
+    "Soft Skills": [
+        "Communication",
+        "Teamwork",
+        "Problem Solving",
+        "Leadership"
+    ]
+}

@@ -1,27 +1,31 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GraduationCap, Mail, Lock, Eye, EyeOff, ArrowRight, Apple } from 'lucide-react';
+import logo from '../assets/image_8a255f.png';
+import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 
-const LoginPage: React.FC = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     // TODO: Add real authentication logic here
-    navigate('/dashboard');
+    navigate('/user');
   };
 
   const handleGoogleSignIn = () => {
     // TODO: Add real Google OAuth logic here
-    navigate('/dashboard');
+    navigate('/user');
   };
-
 
   const handleJoinNow = () => {
     navigate('/signup');
+  };
+
+  const handleForgotPassword = () => {
+    navigate('/forgot-password');
   };
 
   return (
@@ -32,11 +36,11 @@ const LoginPage: React.FC = () => {
             {/* Header */}
             <div className="text-center mb-8">
               <div className="flex items-center justify-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mr-4">
-                  <GraduationCap className="h-8 w-8 text-white" />
+                <div className="w-auto h-auto mr-0">
+                  <img src={logo} alt="Career Companion Logo" className="h-24 w-auto" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-blue-900">Career Companion</h1>
+                  <h1 className="text-2xl font-bold text-gray-900">Career Companion</h1>
                   <p className="text-gray-600 font-sans">Sign in</p>
                 </div>
               </div>
@@ -46,7 +50,7 @@ const LoginPage: React.FC = () => {
             <button
               type="button"
               onClick={handleGoogleSignIn}
-              className="w-full flex items-center justify-center px-4 py-3 border border-gray-200 rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-md mb-3 font-semibold"
+              className="w-full flex items-center justify-center px-4 py-3 border border-gray-200 rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-md mb-6 font-semibold"
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -57,7 +61,6 @@ const LoginPage: React.FC = () => {
               Continue with Google
             </button>
 
-          
             {/* Divider */}
             <div className="relative mb-6">
               <div className="absolute inset-0 flex items-center">
@@ -76,7 +79,7 @@ const LoginPage: React.FC = () => {
                   Email or phone
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Mail className="absolute left-3 top-[35%] transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <input
                     type="text"
                     value={email}
@@ -94,7 +97,7 @@ const LoginPage: React.FC = () => {
                   Password
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Lock className="absolute left-3 top-[35%] transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     value={password}
@@ -106,7 +109,7 @@ const LoginPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    className="absolute right-3 top-[35%] transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                   >
                     {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
@@ -115,7 +118,7 @@ const LoginPage: React.FC = () => {
 
               {/* Forgot password link */}
               <div className="flex justify-end">
-                <button type="button" className="text-sm text-blue-600 hover:text-blue-700 font-sans">
+                <button type="button" onClick={handleForgotPassword} className="text-sm text-blue-600 hover:text-blue-700 font-sans">
                   Forgot password?
                 </button>
               </div>
@@ -123,7 +126,7 @@ const LoginPage: React.FC = () => {
               {/* Sign in Button */}
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors duration-200 font-semibold flex items-center justify-center"
+                className="w-full bg-[#21589C] text-white py-3 rounded-md hover:bg-[#21589C]/90 transition-colors duration-200 font-semibold flex items-center justify-center"
               >
                 Sign in
                 <ArrowRight className="ml-2 h-5 w-5" />

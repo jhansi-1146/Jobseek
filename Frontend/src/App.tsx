@@ -19,6 +19,10 @@ import CertificationsPage from './pages/user/CertificationsPage';
 import ProgressPage from './pages/user/ProgressPage';
 import SignupPage from './pages/SignupPage';
 import VerificationPage from './pages/VerificationPage';
+// Import the new component for the Find Jobs page
+import FindJobsPage from './pages/user/FindJobsPage';
+// Import the new component for the Forgot Password page
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 
 function App() {
   return (
@@ -27,6 +31,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        {/* Add the new route for the Forgot Password page */}
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/verification" element={<VerificationPage />} />
         <Route path="/dashboard" element={<UserDashboard />} />
         <Route path="/user" element={<UserDashboard />} />
@@ -46,10 +52,10 @@ function App() {
         <Route path="/admin/analytics" element={<Analytics />} />
         <Route path="/admin/profile" element={<Profile />} />
         <Route path="/admin/settings" element={<AdminSettings />} />
+        <Route path="/user/jobs" element={<FindJobsPage />} />
       </Routes>
     </div>
   );
 }
-
 
 export default App;

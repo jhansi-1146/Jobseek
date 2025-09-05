@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, MapPin, Building, Users, CheckCircle, Star, ArrowRight, GraduationCap, ArrowDown } from 'lucide-react';
+import { Search, MapPin, Building, Users, CheckCircle, Star, ArrowRight, ArrowDown } from 'lucide-react';
 import bgHero from '../assets/istockphoto-1349094945-612x612 (1).jpg';
+import logo from '../assets/image_8a255f.png';
 
-const HomePage: React.FC = () => {
+const HomePage = () => {
   const navigate = useNavigate();
   const [jobTitle, setJobTitle] = useState('');
   const [location, setLocation] = useState('');
   const [navSolid, setNavSolid] = useState(false);
+
+  // Define the new primary blue color
+  const primaryBlue = '#21589C'; 
+  // Define a slightly darker shade for hover effects
+  const darkBlueHover = '#1A4A7D';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,8 +85,8 @@ const HomePage: React.FC = () => {
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-              <GraduationCap className="h-6 w-6 text-white" />
+            <div className="w-10 h-10 flex items-center justify-center">
+                <img src={logo} alt="Career Companion Logo" className="w-full h-full object-contain" />
             </div>
             <div>
               <h2 className="text-lg font-semibold text-gray-900">Career Companion</h2>
@@ -96,7 +102,7 @@ const HomePage: React.FC = () => {
             </button>
             <button 
               onClick={() => navigate('/login')}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 font-medium"
+              className={`bg-[${primaryBlue}] text-white px-4 py-2 rounded-lg hover:bg-[${darkBlueHover}] font-medium`}
             >
               Get Started
             </button>
@@ -128,31 +134,31 @@ const HomePage: React.FC = () => {
             </p>
             
             {/* Search Bar */}
-            <div className="bg-[#E0F2FE] rounded-2xl shadow-xl border border-gray-200 p-6 mb-12 max-w-4xl mx-auto">
+            <div className="bg-[#EBF1F5] rounded-2xl shadow-xl border border-gray-200 p-6 mb-12 max-w-4xl mx-auto">
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1 relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-400" />
+                  <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[${primaryBlue}]`} />
                   <input
                     type="text"
                     placeholder="Job title, keywords, or company"
                     value={jobTitle}
                     onChange={(e) => setJobTitle(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 text-lg border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-transparent bg-[#F0F9FF] placeholder-blue-400 text-gray-900"
+                    className={`w-full pl-12 pr-4 py-4 text-lg border border-gray-200 rounded-xl focus:ring-2 focus:ring-[${primaryBlue}] focus:border-transparent bg-[#F2F4F7] placeholder-[${primaryBlue}] text-gray-900`}
                   />
                 </div>
                 <div className="flex-1 relative">
-                  <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-400" />
+                  <MapPin className={`absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[${primaryBlue}]`} />
                   <input
                     type="text"
                     placeholder="Location"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 text-lg border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-transparent bg-[#F0F9FF] placeholder-blue-400 text-gray-900"
+                    className={`w-full pl-12 pr-4 py-4 text-lg border border-gray-200 rounded-xl focus:ring-2 focus:ring-[${primaryBlue}] focus:border-transparent bg-[#F2F4F7] placeholder-[${primaryBlue}] text-gray-900`}
                   />
                 </div>
                 <button
                   onClick={handleSearch}
-                  className="bg-blue-500 text-white px-8 py-4 rounded-xl hover:bg-blue-700 font-semibold text-lg flex items-center justify-center shadow-md"
+                  className={`bg-[${primaryBlue}] text-white px-8 py-4 rounded-xl hover:bg-[${darkBlueHover}] font-semibold text-lg flex items-center justify-center shadow-md`}
                 >
                   <Search className="h-5 w-5 mr-2" />
                   Search Jobs
@@ -164,14 +170,14 @@ const HomePage: React.FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-2xl font-bold text-blue-600 mb-2">{stat.number}</div>
+                  <div className={`text-2xl font-bold text-[${primaryBlue}] mb-2`}>{stat.number}</div>
                   <div className="text-gray-600 font-medium">{stat.label}</div>
                 </div>
               ))}
             </div>
             {/* Animated Down Arrow */}
             <div className="flex justify-center mt-12">
-              <ArrowDown className="h-10 w-10 text-blue-500 custom-bounce" />
+              <ArrowDown className={`h-10 w-10 text-[${primaryBlue}] custom-bounce`} />
             </div>
           </div>
         </div>
@@ -228,7 +234,7 @@ const HomePage: React.FC = () => {
 
                   <div className="flex items-center justify-between">
                     <span className="text-lg font-semibold text-gray-900">{job.salary}</span>
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 font-medium">
+                    <button className={`bg-[${primaryBlue}] text-white px-4 py-2 rounded-lg hover:bg-[${darkBlueHover}] font-medium`}>
                       Apply Now
                     </button>
                   </div>
@@ -239,7 +245,7 @@ const HomePage: React.FC = () => {
             <div className="text-center mt-12">
               <button 
                 onClick={() => navigate('/login')}
-                className="bg-white text-blue-600 border-2 border-blue-600 px-8 py-3 rounded-xl hover:bg-blue-50 font-semibold text-lg flex items-center mx-auto"
+                className={`bg-white text-[${primaryBlue}] border-2 border-[${primaryBlue}] px-8 py-3 rounded-xl hover:bg-[#F2F4F7] font-semibold text-lg flex items-center mx-auto`}
               >
                 View All Jobs
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -262,7 +268,7 @@ const HomePage: React.FC = () => {
 
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <div className={`w-16 h-16 bg-[${primaryBlue}] rounded-2xl flex items-center justify-center mx-auto mb-6`}>
                   <CheckCircle className="h-8 w-8 text-white" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">Smart Matching</h3>
@@ -287,17 +293,17 @@ const HomePage: React.FC = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="py-20 bg-gradient-to-r from-blue-400 to-purple-400">
+        <div className={`py-20 bg-gradient-to-r from-[${primaryBlue}] to-purple-500`}>
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-2xl font-bold text-white mb-4">
               Ready to find your dream job?
             </h2>
-            <p className="text-base text-blue-100 mb-8">
+            <p className="text-base text-[#EBF1F5] mb-8">
               Join thousands of students who have already accelerated their career with Career Companion.
             </p>
             <button
               onClick={() => navigate('/login')}
-              className="bg-white text-blue-600 px-8 py-4 rounded-xl hover:bg-gray-50 font-semibold text-lg"
+              className={`bg-white text-[${primaryBlue}] px-8 py-4 rounded-xl hover:bg-gray-50 font-semibold text-lg`}
             >
               Get Started Free
             </button>

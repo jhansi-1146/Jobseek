@@ -23,6 +23,7 @@ import VerificationPage from './pages/VerificationPage';
 import FindJobsPage from './pages/user/FindJobsPage';
 // Import the new component for the Forgot Password page
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         {/* Add the new route for the Forgot Password page */}
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/verification" element={<VerificationPage />} />
         <Route path="/dashboard" element={<UserDashboard />} />
         <Route path="/user" element={<UserDashboard />} />

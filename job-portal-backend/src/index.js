@@ -1,3 +1,8 @@
+require('dotenv').config({ path: __dirname + '/../.env' }); // load env from root
+
+console.log("MONGO URI:", process.env.MONGODB_URI); // debug check
+require('dotenv').config();
+console.log("MONGO URI:", process.env.MONGODB_URI); // debug
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
